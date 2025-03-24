@@ -1,0 +1,89 @@
+### Beginner Level Questions
+-- Retrieve all records from the table.
+   use billionaires;
+   select * from billionaires;
+
+-- List the top 10 richest billionaires by net worth.
+    select personname, finalworth from billionaires
+    order by finalworth desc
+    limit 10;
+
+-- Count the total number of billionaires in the dataset.
+    select count(personname) from billionaires;
+
+-- List all unique industries present in the dataset.
+    select distinct(industries) from billionaires;
+
+-- Find the number of billionaires from each country.
+   select country, count(country) as count_c from billionaires
+   group by country
+   order by count_c desc;
+
+-- Retrieve all billionaires from a specific country (e.g., "United States").
+   select * from billionaires
+   where country = 'united states'
+   limit 20;
+
+-- List all billionaires who are older than 60 years.
+   select personname, age from billionaires
+   where age > 60;
+
+-- Find the names and industries of billionaires from "India".
+   select personname, industries, country from billionaires
+   where country = 'india';
+
+-- Retrieve all billionaires who are self-made.
+   select personname, country, selfmade from billionaires
+   where selfmade = 'true'
+   order by country desc;
+
+-- Display the billionaire with the lowest net worth.
+   select personname, finalworth from billionaires
+   order by finalworth asc
+   limit 20;
+
+### Intermediate Level Questions
+-- Find the average net worth of billionaires by industry.
+   Select industries, Avg(finalworth) as avg_worth
+   from billionaires
+   group by industries
+   order by avg_worth desc;
+
+-- Find the youngest billionaire in the dataset.
+   select personname, age from billionaires
+   order by age asc
+   limit 5;
+
+-- Retrieve billionaires who are older than 70 and have a net worth above $50 billion.
+  select personname, age, finalworth from billionaires
+  where age > 70 and finalworth > 50000
+  order by finalworth desc;
+
+-- Find the gender distribution of billionaires.
+   SELECT gender, count(*) as count
+   from billionaires
+   group by gender;
+
+-- Identify billionaires whose names start with the letter "J".
+   select personname from billionaires
+   where personname regexp '^j';
+
+-- List billionaires who were born in a specific month (e.g., March).
+   select personname, birthmonth from billionaires
+   where birthmonth = 3;
+
+-- Find the top 5 countries with the highest number of billionaires.
+   select personname, country, finalworth from billionaires
+   order by finalworth desc
+   limit 5;
+
+-- Retrieve the billionaire with the longest last name.
+   select  max(lastname) from billionaires;
+
+-- Find the number of billionaires in each industry and order by the highest count.
+   select industries, count(personname) as billionaires_name from billionaires
+   group by industries
+   order by count(personname) desc
+   limit 10;
+
+
