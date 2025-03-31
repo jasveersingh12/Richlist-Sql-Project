@@ -12,4 +12,48 @@ SELECT personName, industries, finalWorth, rank_in_industry
 FROM RankedBillionaires
 WHERE rank_in_industry <= 5
 ORDER BY industries, rank_in_industry;
------------------------------------------xxxxxxxxxxxxxxx--------------------------------------------------
+-----------------------------------------xxxxxxxxxxxxxxx-----------------------------------------------------------
+Questions : find out how many people are from each country who are billionaires. and by industry also 
+Answer
+select industries, count(personname)  as billionaires_count
+from billionaires
+group by industries
+order by  billionaires_count desc;
+------------x-------------
+select country, count(personname)  as billionaires_count
+from billionaires
+group by country
+order by  billionaires_count desc;
+-----------------------------------------------------xxxxxxxxxxxx---------------------------------------------------
+questions : Calculate the percentage of self-made billionaires (selfMade = True) compared to non-self-made ones.
+Answer :
+SELECT 
+    selfMade,
+    COUNT(*) AS billionaire_count,
+    ROUND((COUNT(*) * 100.0) / (SELECT COUNT(*) FROM billionaires), 2) AS percentage
+FROM billionaires
+GROUP BY selfMade;
+-----------------------xxxxxxxxxxxx---------------------------------------------------------------------------------
+questions: find people who are selfmade and  and from automotive industry
+Answer: 
+select personname, industries, selfmade from billionaires
+where selfmade like 't%' and industries = 'automotive' ;
+## note : you can change industries by your choice or find who are not selfmade.
+-----------------------------------------------xxxxxxxxxxxx----------------------------------------------------------
+questions : find the youngest billionaires from table and  who is selfmade and from which industries
+Answer
+select max(age)  from billionaires;
+WITH YoungestAge AS (
+    SELECT MIN(age) AS min_age FROM billionaires WHERE selfMade = TRUE
+)
+SELECT personName, age, industries
+FROM billionaires 
+WHERE selfMade like 't%'
+order by age asc
+limit 5;
+## note you can change limit or oldest people who are selfmade 
+-------------------------------------------------------------xxxxxxxxxxxxxxxxxxxxxxx------------------------------------
+
+
+
+
