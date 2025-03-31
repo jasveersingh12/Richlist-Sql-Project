@@ -1,0 +1,15 @@
+Questions: find the top 5 billionaires from each industry [you can find dataset in richlist repositary] note
+Answer:
+WITH RankedBillionaires AS (
+    SELECT 
+        personName, 
+        industries, 
+        finalWorth, 
+        RANK() OVER (PARTITION BY industries ORDER BY finalWorth DESC) AS rank_in_industry
+    FROM billionaires
+)
+SELECT personName, industries, finalWorth, rank_in_industry
+FROM RankedBillionaires
+WHERE rank_in_industry <= 5
+ORDER BY industries, rank_in_industry;
+-----------------------------------------xxxxxxxxxxxxxxx--------------------------------------------------
